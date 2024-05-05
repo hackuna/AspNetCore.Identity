@@ -1,0 +1,24 @@
+﻿services:
+  database:
+    image: postgres
+    shm_size: 128mb
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - database:/var/lib/postgresql/data
+
+  aspnetcore.identity:
+    image: aspnetcore.identity
+    ports:
+      - 5055:8080
+    depends_on:
+      - database
+    build:
+      context: .
+      dockerfile: AspNetCore.Identity/Dockerfile
+
+volumes:
+  database:

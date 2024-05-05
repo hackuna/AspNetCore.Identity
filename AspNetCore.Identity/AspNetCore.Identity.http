@@ -1,0 +1,6 @@
+@AspNetCore.Identity_HostAddress = http://localhost:5055
+
+GET {{AspNetCore.Identity_HostAddress}}/
+Accept: application/json
+
+###
