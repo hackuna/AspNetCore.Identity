@@ -1,24 +1,40 @@
-﻿services:
+volumes:
+  aspnetcore-identity-postgres: {}
+
+services:
+
   database:
     image: postgres
+    container_name: postgres
+    hostname: postgres
     shm_size: 128mb
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     ports:
-      - 5432:5432
+      - "5432:5432"
     volumes:
-      - database:/var/lib/postgresql/data
+      - aspnetcore-identity-postgres:/var/lib/postgresql/data
+
+  adminer:
+    image: adminer
+    container_name: adminer
+    hostname: adminer
+    ports:
+      - "5433:8080"
+    depends_on:
+      - database
+    links:
+      - database
 
   aspnetcore.identity:
-    image: aspnetcore.identity
-    ports:
-      - 5055:8080
+    image: ${DOCKER_REGISTRY-}aspnetcoreidentity
+    container_name: ${DOCKER_REGISTRY-}aspnetcoreidentity
+    hostname: ${DOCKER_REGISTRY-}aspnetcoreidentity
     depends_on:
+      - database
+    links:
       - database
     build:
       context: .
       dockerfile: AspNetCore.Identity/Dockerfile
-
-volumes:
-  database:

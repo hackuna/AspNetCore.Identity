@@ -1,5 +1,3 @@
-using System.Security.Claims;
-using System.Security.Cryptography.X509Certificates;
 using AspNetCore.Identity.Data;
 using AspNetCore.Identity.Data.Identity;
 using AspNetCore.Identity.Data.Protection;
@@ -9,8 +7,12 @@ using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption;
 using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
+using System.Security.Cryptography.X509Certificates;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Configuration.AddEnvironmentVariables();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -41,12 +43,12 @@ builder.Services
     .AddApiEndpoints();
 
 builder.Services.AddDbContextPool<ApplicationDbContext>(options => options.UseNpgsql(
-    builder.Configuration.GetConnectionString("Database")));
+    builder.Configuration["DATABASE"]));
 
 builder.Services
     .AddDataProtection()
     .PersistKeysToDbContext<ApplicationDbContext>()
-    .ProtectKeysWithCertificate(new X509Certificate2("certificate.pfx", builder.Configuration["CertificatePassword"])) // https://stackoverflow.com/a/16481636
+    .ProtectKeysWithCertificate(new X509Certificate2("certificate.pfx", builder.Configuration["CERTIFICATE_PASSWORD"])) // https://stackoverflow.com/a/16481636
     .SetDefaultKeyLifetime(TimeSpan.FromDays(14))
     .SetApplicationName(builder.Environment.ContentRootPath.TrimEnd(Path.DirectorySeparatorChar))
     .UseCryptographicAlgorithms(new AuthenticatedEncryptorConfiguration

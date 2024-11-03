@@ -3,6 +3,7 @@ using System;
 using AspNetCore.Identity.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,19 +12,20 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace AspNetCore.Identity.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("00000000000000_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasDefaultSchema("identity")
-                .HasAnnotation("ProductVersion", "8.0.4")
+                .HasAnnotation("ProductVersion", "8.0.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("AspNetCore.Identity.Data.ApplicationRole", b =>
+            modelBuilder.Entity("AspNetCore.Identity.Data.Identity.ApplicationRole", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -47,10 +49,10 @@ namespace AspNetCore.Identity.Migrations
                         .IsUnique()
                         .HasDatabaseName("RoleNameIndex");
 
-                    b.ToTable("Roles", "identity");
+                    b.ToTable("Roles", (string)null);
                 });
 
-            modelBuilder.Entity("AspNetCore.Identity.Data.ApplicationRoleClaim", b =>
+            modelBuilder.Entity("AspNetCore.Identity.Data.Identity.ApplicationRoleClaim", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -71,10 +73,10 @@ namespace AspNetCore.Identity.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("RoleClaims", "identity");
+                    b.ToTable("RoleClaims", (string)null);
                 });
 
-            modelBuilder.Entity("AspNetCore.Identity.Data.ApplicationUser", b =>
+            modelBuilder.Entity("AspNetCore.Identity.Data.Identity.ApplicationUser", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -136,10 +138,10 @@ namespace AspNetCore.Identity.Migrations
                         .IsUnique()
                         .HasDatabaseName("UserNameIndex");
 
-                    b.ToTable("Users", "identity");
+                    b.ToTable("Users", (string)null);
                 });
 
-            modelBuilder.Entity("AspNetCore.Identity.Data.ApplicationUserClaim", b =>
+            modelBuilder.Entity("AspNetCore.Identity.Data.Identity.ApplicationUserClaim", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -160,18 +162,16 @@ namespace AspNetCore.Identity.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserClaims", "identity");
+                    b.ToTable("UserClaims", (string)null);
                 });
 
-            modelBuilder.Entity("AspNetCore.Identity.Data.ApplicationUserLogin", b =>
+            modelBuilder.Entity("AspNetCore.Identity.Data.Identity.ApplicationUserLogin", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)");
+                        .HasColumnType("text");
 
                     b.Property<string>("ProviderKey")
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)");
+                        .HasColumnType("text");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("text");
@@ -183,10 +183,10 @@ namespace AspNetCore.Identity.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserLogins", "identity");
+                    b.ToTable("UserLogins", (string)null);
                 });
 
-            modelBuilder.Entity("AspNetCore.Identity.Data.ApplicationUserRole", b =>
+            modelBuilder.Entity("AspNetCore.Identity.Data.Identity.ApplicationUserRole", b =>
                 {
                     b.Property<Guid>("UserId")
                         .HasColumnType("uuid");
@@ -198,28 +198,26 @@ namespace AspNetCore.Identity.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("UserRoles", "identity");
+                    b.ToTable("UserRoles", (string)null);
                 });
 
-            modelBuilder.Entity("AspNetCore.Identity.Data.ApplicationUserToken", b =>
+            modelBuilder.Entity("AspNetCore.Identity.Data.Identity.ApplicationUserToken", b =>
                 {
                     b.Property<Guid>("UserId")
                         .HasColumnType("uuid");
 
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Name")
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Value")
                         .HasColumnType("text");
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
-                    b.ToTable("UserTokens", "identity");
+                    b.ToTable("UserTokens", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.DataProtection.EntityFrameworkCore.DataProtectionKey", b =>
@@ -238,12 +236,12 @@ namespace AspNetCore.Identity.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("DataProtectionKeys", "identity");
+                    b.ToTable("DataProtectionKeys");
                 });
 
-            modelBuilder.Entity("AspNetCore.Identity.Data.ApplicationRoleClaim", b =>
+            modelBuilder.Entity("AspNetCore.Identity.Data.Identity.ApplicationRoleClaim", b =>
                 {
-                    b.HasOne("AspNetCore.Identity.Data.ApplicationRole", "Role")
+                    b.HasOne("AspNetCore.Identity.Data.Identity.ApplicationRole", "Role")
                         .WithMany("RoleClaims")
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -252,9 +250,9 @@ namespace AspNetCore.Identity.Migrations
                     b.Navigation("Role");
                 });
 
-            modelBuilder.Entity("AspNetCore.Identity.Data.ApplicationUserClaim", b =>
+            modelBuilder.Entity("AspNetCore.Identity.Data.Identity.ApplicationUserClaim", b =>
                 {
-                    b.HasOne("AspNetCore.Identity.Data.ApplicationUser", "User")
+                    b.HasOne("AspNetCore.Identity.Data.Identity.ApplicationUser", "User")
                         .WithMany("Claims")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -263,9 +261,9 @@ namespace AspNetCore.Identity.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("AspNetCore.Identity.Data.ApplicationUserLogin", b =>
+            modelBuilder.Entity("AspNetCore.Identity.Data.Identity.ApplicationUserLogin", b =>
                 {
-                    b.HasOne("AspNetCore.Identity.Data.ApplicationUser", "User")
+                    b.HasOne("AspNetCore.Identity.Data.Identity.ApplicationUser", "User")
                         .WithMany("Logins")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -274,15 +272,15 @@ namespace AspNetCore.Identity.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("AspNetCore.Identity.Data.ApplicationUserRole", b =>
+            modelBuilder.Entity("AspNetCore.Identity.Data.Identity.ApplicationUserRole", b =>
                 {
-                    b.HasOne("AspNetCore.Identity.Data.ApplicationRole", "Role")
+                    b.HasOne("AspNetCore.Identity.Data.Identity.ApplicationRole", "Role")
                         .WithMany("UserRoles")
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("AspNetCore.Identity.Data.ApplicationUser", "User")
+                    b.HasOne("AspNetCore.Identity.Data.Identity.ApplicationUser", "User")
                         .WithMany("UserRoles")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -293,9 +291,9 @@ namespace AspNetCore.Identity.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("AspNetCore.Identity.Data.ApplicationUserToken", b =>
+            modelBuilder.Entity("AspNetCore.Identity.Data.Identity.ApplicationUserToken", b =>
                 {
-                    b.HasOne("AspNetCore.Identity.Data.ApplicationUser", "User")
+                    b.HasOne("AspNetCore.Identity.Data.Identity.ApplicationUser", "User")
                         .WithMany("Tokens")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -304,14 +302,14 @@ namespace AspNetCore.Identity.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("AspNetCore.Identity.Data.ApplicationRole", b =>
+            modelBuilder.Entity("AspNetCore.Identity.Data.Identity.ApplicationRole", b =>
                 {
                     b.Navigation("RoleClaims");
 
                     b.Navigation("UserRoles");
                 });
 
-            modelBuilder.Entity("AspNetCore.Identity.Data.ApplicationUser", b =>
+            modelBuilder.Entity("AspNetCore.Identity.Data.Identity.ApplicationUser", b =>
                 {
                     b.Navigation("Claims");
 

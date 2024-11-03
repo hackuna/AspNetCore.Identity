@@ -1,0 +1,10 @@
+services:
+
+  aspnetcore.identity:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      - DATABASE=Host=postgres;Port=5432;Database=Application;Username=postgres;Password=postgres;Include Error Detail=true
+      - CERTIFICATE_PASSWORD=
+    ports:
+      - "8080"

@@ -1,11 +1,18 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35424.110
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetCore.Identity", "AspNetCore.Identity\AspNetCore.Identity.csproj", "{36440CFE-1B27-470A-A9E9-ACA8B153D6C3}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CFC5E5B6-BA7B-4F54-8BCA-F010A4155213}"
 	ProjectSection(SolutionItems) = preProject
-		docker-compose.yml = docker-compose.yml
+		.gitignore = .gitignore
+		Directory.Build.props = Directory.Build.props
+		Directory.Packages.props = Directory.Packages.props
 	EndProjectSection
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{8A391A46-27F5-4AF2-A155-A70D2978619C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,5 +24,15 @@ Global
 		{36440CFE-1B27-470A-A9E9-ACA8B153D6C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{36440CFE-1B27-470A-A9E9-ACA8B153D6C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{36440CFE-1B27-470A-A9E9-ACA8B153D6C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A391A46-27F5-4AF2-A155-A70D2978619C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A391A46-27F5-4AF2-A155-A70D2978619C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A391A46-27F5-4AF2-A155-A70D2978619C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A391A46-27F5-4AF2-A155-A70D2978619C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8A391A46-27F5-4AF2-A155-A70D2978619C} = {CFC5E5B6-BA7B-4F54-8BCA-F010A4155213}
 	EndGlobalSection
 EndGlobal
